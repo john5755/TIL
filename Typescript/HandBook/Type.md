@@ -23,6 +23,10 @@ x[3] = ''world"; // 오류 property 3이 없음.
 
 ### Enum
 
+- 데이터가 한정된 값만 갖는 경우
+  
+  - ex) 요일, 계절
+
 ```typescript
 enum Color {Red, Green, Blue}
 let c: Color = Color.Green;
@@ -77,8 +81,6 @@ function warnUser(): void{
 
 - 변수 선언에는 유용하지 않음. null과 undefined만 가능.
 
-
-
 ### Null and Undefined
 
 - 모든 type의 하위 타입, number같은 type에 할당할 수 있다는 것 의미
@@ -86,8 +88,6 @@ function warnUser(): void{
 - `--strictNullChecks` 사용 시 any와 각각 자신에게만 할당 가능
   
   - undefined는 void에도 할당 가능
-
-
 
 ### Never
 
@@ -105,8 +105,6 @@ function error(message: string): never{
   
   - 어떤 type도 never에 할당할 수 있거나 하위 type이 아니다.
 
-
-
 ### Object
 
 - 원시 타입이 아닌 타입
@@ -120,8 +118,6 @@ declare function create(o: object | null): void;
 create({ prop: 0 }) // 성공
 create(null) // 성공
 ```
-
-
 
 ### Type Assertion
 
