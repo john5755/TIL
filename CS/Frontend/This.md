@@ -67,4 +67,55 @@ function f2(){
 f2() === undefined; // true
 ```
 
+- this의 값을 한 문맥에서 다른 문맥으로 넘기려면 call()이나 apply()사용
 
+```js
+// call 또는 apply의 첫 번째 인자로 객체가 전달 될 수 있으며 this가 그 객체에 묶이
+let obj = {a: 'Custom'}
+
+// 변수를 선언하고 변수에 프로퍼티로 전역 window 할당
+let a = 'Global'
+
+function whatsThis(){
+    return this.a
+}
+
+whatsThis(); // this는 'Global'
+whatsThis.call(obj); // this는 'Custom'
+whatsThis.apply(obj); // this는 'Custom'
+```
+
+```js
+function add(c,d){
+    return this.a + this.b + c + d
+}
+
+let o = {a:1, b:3};
+
+// 첫 번째 인자는 'this'로 사용할 객체
+// 이어지는 인자들은 함수 호출에서 인자로 전달
+add.call(o, 5, 7); // 16
+
+// 두 번째 인자는 함수 호출에서 인수로 사용될 멤버들이 위치한 배열
+add.apply(o, [10,20]); // 34
+```
+
+- 비엄격모드에서 `this`로 전달된 값이 객체가 아닌 경우 call이나 apply는 이를 변환하기 위한 시도를 함.
+  
+  - null이나 undefined 값은 전역 객체가 됨
+  
+  - 7이나 'foo'같은 원시값은 관련된 생성자를 사용해 객체로 변환
+    
+    - 7은 new Number(7)에 의해 객체로 변환
+    
+    - 문자열 'foo'는 new String('foo')에 의해 객체로 변환
+  
+  ```js
+  function bar(){
+      console.log(Object.prototype.toString(call(this));
+  }
+  
+  bar.call(7); // [object Number]
+  bar.call('foo'); // [object String]
+  bar.call(undefined) // [object Global]
+  ```
