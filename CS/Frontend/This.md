@@ -317,3 +317,9 @@ for (var i = 0; i < elements.length; i ++){
 ```
 
 - window 객체 반환 (this가 정해지지 않음)
+
+
+
+#### 출처
+
+- [this - JavaScript | MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/this)
