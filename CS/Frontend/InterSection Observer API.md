@@ -25,3 +25,7 @@
 - root와 대상 요소가 교차하는 정도를 `intersection ratio`라고 함
   
   - 대상 요소의 가시성 퍼센티지를 0.0~1.0의 숫자로 표현
+
+
+
+### InterSection Observer 생성하기
