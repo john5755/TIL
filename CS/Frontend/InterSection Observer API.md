@@ -26,6 +26,20 @@
   
   - 대상 요소의 가시성 퍼센티지를 0.0~1.0의 숫자로 표현
 
-
-
 ### InterSection Observer 생성하기
+
+- 생성자 호출 시 콜백 함수를 제공해야 한다.
+
+- 콜백함수는 threshold가 한 방향 혹은 다른 방향으로 교차할 때 실행된다.
+
+```js
+let options = {
+    root: document.querySelector('#scrollArea'),
+    rootMargin: '0px',
+    threshold: 1.0,
+}
+
+let observer = new IntersectionObserver(callback, options)
+```
+
+- threshold: 1.0은 대상 요소가 root 내 지정 요소 내에서 100% 보여질 때 콜백이 호출 될 것을 의미
