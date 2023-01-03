@@ -44,8 +44,6 @@ let observer = new IntersectionObserver(callback, options)
 
 - threshold: 1.0은 대상 요소가 root 내 지정 요소 내에서 100% 보여질 때 콜백이 호출 될 것을 의미
 
-
-
 ### InterSection Observer 설정하기
 
 - options 객체가 observer 콜백이 호출되는 상황을 조작할 수 있다.
@@ -83,3 +81,88 @@ let observer = new IntersectionObserver(callback, options)
     - 요소가 1픽셀이라도 보이자 마자 콜백이 실행
   
   - 1.0은 요소의 모든 픽셀이 화면에 노출되기 전에는 콜백을 실행시키지 않음을 의미
+
+
+
+### 관찰될 요소 타겟팅 하기
+
+- observer를 생성하면, 관찰될 target을 주어야 한다.
+
+```js
+let target = document.querySelector('#listitem');
+observer.observe(target)
+```
+
+- target이 정해진 threshold의 조건에 맞으면, callback이 실행된다.
+
+- callback은 `IntersectionObserverEntry`의 list를 받는다.
+
+```js
+let callback = (entries, observer) => {
+    entries.foreach(entry => {
+    // Each entry describes an intersection change for one observed
+    // target element:
+    //   entry.boundingClientRect
+    //   entry.intersectionRatio
+    //   entry.intersectionRect
+    //   entry.isIntersecting
+    //   entry.rootBounds
+    //   entry.target
+    //   entry.time
+});
+};
+```
+
+- callback은 main thread에서 실행된다.
+  
+  - 가능한 빨리 실행되어야 한다.
+  
+  - 실행 되어야 할 작업이 있으면 `Window.requestIdleCallback()`을 사용한다.
+
+- root를 특정화했다면, target은 root의 자손 요소여야 한다.
+
+#### IntersectionObserverEntry
+
+- boundingClient
+  
+  - target의 정보를 반환
+  
+  - getBoundingClientRect()를 사용하면 같은 값을 얻을 수 있다.
+  
+  - (bottom, height, left, right, top, width, x, y)
+
+- intersectionRatio
+  
+  - target과 root가 교차되는 부분의 정보를 반환한다.
+
+- intersectionRect
+  
+  - target과 root가 얼마나 교차되는 지를 수치로 반환한다.
+  
+  - 0.0 ~ 1.0
+
+- isIntersecting
+  
+  - target과 root가 교차된 상태인지 아닌지를 boolean으로 반환한다.
+
+- rootBounds
+  
+  - root 요소에 대한 정보를 반환한다.
+  
+  - 아무런 옵션 전달하지 않으면 viewport를 기준으로 한다.
+
+- target
+  
+  - 관찰하고 있는 target element를 반환한다.
+
+- time
+  
+  - target과 root의 교차가 일어난 시간을 반환한다.
+
+
+
+#### 출처
+
+- [[JavaScript] Intersection Observer API 정리](https://designer-ej.tistory.com/entry/JavaScript-Intersection-Observer-API-%EC%A0%95%EB%A6%AC)
+
+- [Intersection Observer API - Web API | MDN](https://developer.mozilla.org/ko/docs/Web/API/Intersection_Observer_API)
