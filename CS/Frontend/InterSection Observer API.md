@@ -82,8 +82,6 @@ let observer = new IntersectionObserver(callback, options)
   
   - 1.0은 요소의 모든 픽셀이 화면에 노출되기 전에는 콜백을 실행시키지 않음을 의미
 
-
-
 ### 관찰될 요소 타겟팅 하기
 
 - observer를 생성하면, 관찰될 target을 주어야 한다.
@@ -160,6 +158,60 @@ let callback = (entries, observer) => {
   - target과 root의 교차가 일어난 시간을 반환한다.
 
 
+
+### 무한 스크롤 예시
+
+```js
+  const registerObservingEl = (el: Element) => {
+    if (io !== null) {
+      io.observe(el);
+    }
+  };
+
+  function setScrollTarget() {
+    const currentTargetClass= `${page}페이지`;
+    const target = document.getElementsByClassName(currentTargetClass)[0];
+    if (target) {
+      registerObservingEl(target);
+    }
+  }
+  
+  useEffect(() => {
+    if (searchResultList.length > 0) {
+      setIsLoaded(true);
+    }
+  }, [searchResultList.length]);
+
+  useEffect(() => {
+    if (isLoaded) {
+      setScrollTarget();
+    }
+  }, [isLoaded]);
+  
+  useEffect(() => {
+    const targetObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsLoaded(false);
+          setPage(page + 1);
+          if (io !== null) {
+            io.disconnect();
+          }
+        }
+      });
+    });
+    setIo(targetObserver);
+    fetchResultList();
+  }, [page]);
+```
+
+- page가 변화 할 시 새로운 targetObserver 생성
+
+- targetObserver는 isIntersecting이 true이면 page를 늘리도록 설정 됨
+
+- isLoaded는 새로운 list들이 다 받아진 후에 target이 설정되도록 하는 역할
+
+- setScrollTarget및 registerObservingEl이 target을 설정함
 
 #### 출처
 
