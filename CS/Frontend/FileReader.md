@@ -60,13 +60,9 @@
   
   - progress 이벤트 핸들러. Blob 컨텐츠를 읽는 동안 호출
 
-
-
 - FileReader는 EventTarget으로 부터 상속받았음
   
   - 언급된 모든 event는 addEventListener 메서드를 사용할 수 있음
-
-
 
 #### 메서드
 
@@ -94,6 +90,39 @@
   
   - 파일의 컨텐츠를 text string 형태로 하는 데이터를 포함
 
+#### 예시 - 프로필 사진 변경
 
+```js
+  const photoInput = useRef<HTMLInputElement>(null);
+  const photoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files !== null && event.target.files.length !== 0) {
+      props.setPhoto(event.target.files[0]);
+    } else {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        props.setPhotoUrl(reader.result);
+      }
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  /* */
+    <input
+    type="file"
+    style={{ display: "none" }}
+    accept="image/jpg,image/png,image/jpeg"
+    name="profile_img"
+    onChange={photoChange}
+    ref={photoInput}
+    ></input>
+```
+
+
+
+#### 출처
+
+- [FileReader - Web API | MDN](https://developer.mozilla.org/ko/docs/Web/API/FileReader)
 
 
