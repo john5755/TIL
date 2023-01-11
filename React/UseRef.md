@@ -44,10 +44,47 @@
     
     - 브라우저 메모리에 정리되지 못한 intervalId들이 1초에 하나씩 쌓인다
 
+## UseRef 사용방법
 
+- useRef는 `current`속성을 가지고 있는 객체를 반환
+  
+  - 인자로 넘어온 초기값을 current 속성에 할당
+  
+  - 값을 변경해도 상태를 변경할 때 처럼 React Component가 다시 랜더링 되지 않음
+  
+  - 다시 랜더링 될 때도 유실되지 않음
+
+```js
+import React, { useState, useRef } from "react";
+
+function ManualCounter() {
+  const [count, setCount] = useState(0);
+  const intervalId = useRef(null);
+  console.log(`랜더링... count: ${count}`);
+
+  const startCounter = () => {
+    intervalId.current = setInterval(
+      () => setCount((count) => count + 1),
+      1000
+    );
+    console.log(`시작... intervalId: ${intervalId.current}`);
+  };
+
+  const stopCounter = () => {
+    clearInterval(intervalId.current);
+    console.log(`정지... intervalId: ${intervalId.current}`);
+  };
+
+  return (
+    <>
+      <p>자동 카운트: {count}</p>
+      <button onClick={startCounter}>시작</button>
+      <button onClick={stopCounter}>정지</button>
+    </>
+  );
+}
+```
 
 #### 출처
 
 - https://www.daleseo.com/react-hooks-use-ref/
-
-
