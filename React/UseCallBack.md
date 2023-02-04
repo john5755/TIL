@@ -5,6 +5,7 @@
 - 첫 번째 인자로 넘어온 함수, 두 번째 인자로 넘어온 배열 내의 값이 변경될 때 까지 저장해놓고 재사용
 
 ### 자바스크립트 함수 동등성
+<<<<<<< HEAD
 
 - 동일한 코드의 js 함수를 `===`으로 검사하면 false가 나옴
   
@@ -122,3 +123,5 @@ export default function SmartHome() {
 #### 출처
 
 - daleseo.com/react-hook-use-callback/
+=======
+>>>>>>> 3c04a99 (usecallback main)
