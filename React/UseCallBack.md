@@ -124,7 +124,10 @@ export default function SmartHome() {
 
 - daleseo.com/react-hook-use-callback/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 3c04a99 (usecallback main)
 =======
 >>>>>>> 85cfc83305111a12e69b18b63056cf95bdf08945
+=======
+>>>>>>> 85cfc83 (usecallback use)
