@@ -4,7 +4,7 @@
 
 - 필요성
   
-  - 페이지가 스크롤 되는 도중에 발생하는 이미지나 다른 컨텐츠의 지연 로딩
+  - 페이지가 스크롤 되는 도중에 발생하는 이미지나 다른 컨텐츠의 지연 로딩.
   
   - `infinite-scroll`구현
   
@@ -157,8 +157,6 @@ let callback = (entries, observer) => {
   
   - target과 root의 교차가 일어난 시간을 반환한다.
 
-
-
 ### 무한 스크롤 예시
 
 ```js
@@ -175,7 +173,7 @@ let callback = (entries, observer) => {
       registerObservingEl(target);
     }
   }
-  
+
   useEffect(() => {
     if (searchResultList.length > 0) {
       setIsLoaded(true);
@@ -187,7 +185,7 @@ let callback = (entries, observer) => {
       setScrollTarget();
     }
   }, [isLoaded]);
-  
+
   useEffect(() => {
     const targetObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
