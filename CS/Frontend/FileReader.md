@@ -6,7 +6,7 @@
   
   - `<input>` 태그 이용하여 유저가 선택한 파일들의 결과로 반환된 FileList 객체
   
-  - D&D로 반환된 DataTransfer 객체
+  - D&D로 반환된 DataTransfer 객체.
   
   - HTMLCanvasElement의 `mozGetAsFile()` API
 
