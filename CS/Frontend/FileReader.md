@@ -12,7 +12,7 @@
 
 ### 생성자
 
-- FileReader().
+- FileReader()
 
 ### 속성
 
